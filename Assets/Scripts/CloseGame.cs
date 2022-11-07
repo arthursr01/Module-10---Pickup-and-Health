@@ -1,27 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Netcode;
-using UnityEngine;
-using UnityEngine.UI;
+//using system.collections;
+//using system.collections.generic;
+//using unity.netcode;
+//using unityengine;
+//using unityengine.ui;
 
-public class CloseGame : NetworkBehaviour
-{
-    public Button btnGameOver;
+//public class closegame : networkbehaviour
+//{
+//    public button btngameover;
 
-    public void Start()
-    {
-        if(IsHost )
-        {
-            btnGameOver.onClick.AddListener(doExitGame);
-        }
-        if (IsClient)
-        {
-            btnGameOver.onClick.AddListener(doExitGame);
-        }
+//    public void start()
+//    {
+//        if(ishost )
+//        {
+//            btngameover.onclick.addlistener(doexitgame);
+//        }
+//        if (isclient)
+//        {
+//            btngameover.onclick.addlistener(doexitgame);
+//        }
         
-    }
-    void doExitGame()
-    {
-        Application.Quit();
-    }
-}
+//    }
+//    void doexitgame()
+//    {
+//        application.quit();
+//    }
+//}
