@@ -127,9 +127,10 @@ public class Player : NetworkBehaviour
         GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
         transform.Find("Body").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
         transform.Find("RArm").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        transform.Find("LTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        transform.Find("RTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        transform.Find("RArmPiece").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        transform.Find("LArm").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        // transform.Find("LTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        // transform.Find("RTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        //transform.Find("RArmPiece").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
     }
 
 
@@ -177,11 +178,24 @@ public class Player : NetworkBehaviour
             transform.Translate(PositionChange.Value);
             transform.Rotate(RotationChange.Value);
         }
-       
+
+        if (Score.Value <= 0)
+        {
+            var scene = NetworkManager.SceneManager.LoadScene("GameOver",
+        UnityEngine.SceneManagement.LoadSceneMode.Single);
+            PauseGame();
+            
+        }
+
     }
 
     public void DisplayScore()
     {
         txtScoreDisplay.text = Score.Value.ToString();
+    }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
     }
 }
