@@ -14,8 +14,24 @@ public class Main : NetworkBehaviour {
     public TMPro.TMP_InputField inputIp;
     public TMPro.TMP_InputField inputPort;
     public TMPro.TMP_Text txtStatus;
-    public IpAddresses ip;
-   
+    public IpAddresses ips;
+
+
+    public void Awake()
+    {
+        if (GameData.dbgRun.startMode != DebugRunner.StartModes.CHOOSE)
+        {
+            btnHost.gameObject.SetActive(false);
+            btnClient.gameObject.SetActive(false);
+        }
+        ips.IpChosen += onIpCLicked;
+    }
+    private void onIpCLicked(string ip)
+    {
+        inputIp.text = ip;
+    }
+
+
 
     public void Start() {
         btnHost.onClick.AddListener(OnHostClicked);

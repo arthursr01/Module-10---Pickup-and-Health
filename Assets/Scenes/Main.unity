@@ -1267,7 +1267,7 @@ MonoBehaviour:
   inputIp: {fileID: 474824009}
   inputPort: {fileID: 1056663586}
   txtStatus: {fileID: 1175999637}
-  ip: {fileID: 4771772880851503319}
+  ips: {fileID: 4771772880851503319}
 --- !u!4 &1101328514
 Transform:
   m_ObjectHideFlags: 0
@@ -2858,6 +2858,10 @@ PrefabInstance:
     - target: {fileID: 5811143639819577989, guid: ec7381d914455094cbf8d1037ff83cbb, type: 3}
       propertyPath: m_Name
       value: IpAddresses
+      objectReference: {fileID: 0}
+    - target: {fileID: 6297168369962215767, guid: ec7381d914455094cbf8d1037ff83cbb, type: 3}
+      propertyPath: ipButtonPrefab
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7128185807279804635, guid: ec7381d914455094cbf8d1037ff83cbb, type: 3}
       propertyPath: m_Pivot.x

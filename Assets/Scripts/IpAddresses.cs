@@ -5,7 +5,6 @@ using System.Net;
 using System.IO;
 using System.Text;
 using TMPro;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.UI;
 using AddressFamily = System.Net.Sockets.AddressFamily;
@@ -22,7 +21,9 @@ public class IpAddresses : MonoBehaviour
     public GameObject btnTemplate;
     public Button ipButtonPrefab;
 
-    public event Action<string> ipChosen;
+    public event Action<string> IpChosen;
+
+  
 
     private void Start()
     {
@@ -50,7 +51,7 @@ public class IpAddresses : MonoBehaviour
 
     private void OnIpButtonClicked(string ip)
     {
-        ipChosen.Invoke(ip);
+        IpChosen.Invoke(ip);
     }
 
     // adapted from https://forum.unity.com/threads/how-to-get-the-client-lan-ip-address.1306539/
