@@ -194,7 +194,7 @@ public class Player : NetworkBehaviour
         txtScoreDisplay.text = Score.Value.ToString();
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
     }
