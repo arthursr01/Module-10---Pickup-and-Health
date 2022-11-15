@@ -127,9 +127,9 @@ public class Player : NetworkBehaviour
         GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
         transform.Find("Body").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
         transform.Find("RArm").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        transform.Find("LArm").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        // transform.Find("LTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
-        // transform.Find("RTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        //transform.Find("LArm").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        transform.Find("LTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
+        transform.Find("RTred").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
         //transform.Find("RArmPiece").GetComponent<MeshRenderer>().material.color = PlayerColor.Value;
     }
 
