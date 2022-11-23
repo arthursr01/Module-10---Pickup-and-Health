@@ -16,7 +16,7 @@ public class Player : NetworkBehaviour
     
 
     public TMPro.TMP_Text txtScoreDisplay;
-   
+    public TMPro.TMP_Text txtTimeDisplay;
 
 
     private GameManager _gameMgr;

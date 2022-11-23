@@ -13,13 +13,24 @@ public class GameManager : NetworkBehaviour
     private List<Vector3> availableSpawnPositions = new List<Vector3>();
     private bool isGameOver = false;
     private int maxScore = 100;
-
+    public TMPro.TMP_Text txtTimeDisplay;
+    public float timeRemaining = 30f;
 
     public void Start()
     {
         GameData.dbgRun.StartGameWithSceneIfNotChosen();
     }
 
+    public void Update()
+    {
+        timeRemaining -= Time.deltaTime;
+        txtTimeDisplay.text = timeRemaining.ToString().Substring(0,3);
+
+        if (timeRemaining < 0)
+        {
+            GameOver();
+        }
+    }
     //public void Awake()
     //{
     //    RefreshSpawnPoints();
@@ -86,7 +97,9 @@ public class GameManager : NetworkBehaviour
         isGameOver = true;
         Debug.Log("GAME OVER");
         Player winner = null;
-
+        var scene = NetworkManager.SceneManager.LoadScene("GameOver",
+        UnityEngine.SceneManagement.LoadSceneMode.Single);
+        
 
         foreach (Player player in players)
         {
@@ -99,6 +112,10 @@ public class GameManager : NetworkBehaviour
 
         foreach (Player player in players)
         {
+            if (winner == null)
+            {
+                player.txtScoreDisplay.text = "DRAW";
+            }
             if (player != winner)
             {
                 player.gameObject.transform.LookAt(winner.transform);
@@ -112,6 +129,11 @@ public class GameManager : NetworkBehaviour
         {
             Destroy(bullets[i]);
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
     }
 
     private void HostOnPlayerScoreChanged(int previos, int current)
