@@ -22,15 +22,19 @@ public class Player : NetworkBehaviour
     private GameManager _gameMgr;
     private Camera _camera;
     public float movementSpeed = .5f;
-    private float rotationSpeed = 1f;
+    public float rotationSpeed = 1f;
     private BulletSpawner _bulletSpawner;
+    public float timeRemaining = 30f;
+    public Vector3 startPos;
+    public float maxDist = 10;
 
 
     private void Start()
     {
         ApplyPlayerColor();
         PlayerColor.OnValueChanged += OnPlayerColorChanged;
-        
+        startPos = transform.position;
+
     }
 
     public override void OnNetworkSpawn()
@@ -163,6 +167,18 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
+        if (timeRemaining > 0)
+        {
+            timeRemaining -= Time.deltaTime;
+            txtTimeDisplay.text = timeRemaining.ToString().Substring(0, 3);
+        }
+
+        else if (timeRemaining <= 0)
+        {
+            PauseGame();
+            
+        }
+        txtTimeDisplay.text = timeRemaining.ToString().Substring(0, 3);
         if (IsOwner)
         {
             Vector3[] results = CalcMovement();

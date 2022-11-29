@@ -15,7 +15,7 @@ public class GameManager : NetworkBehaviour
     private int maxScore = 100;
     public TMPro.TMP_Text txtTimeDisplay;
     public float timeRemaining = 30f;
-
+    
     public void Start()
     {
         GameData.dbgRun.StartGameWithSceneIfNotChosen();
@@ -23,13 +23,21 @@ public class GameManager : NetworkBehaviour
 
     public void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        txtTimeDisplay.text = timeRemaining.ToString().Substring(0,3);
 
-        if (timeRemaining < 0)
+
+        if (timeRemaining > 0)
         {
-            GameOver();
+            timeRemaining -= Time.deltaTime;
+            txtTimeDisplay.text = timeRemaining.ToString().Substring(0, 3);
         }
+
+        else if (timeRemaining <= 0)
+        {
+            timeRemaining = 0;
+            GameOver();
+            PauseGame();
+        }
+
     }
     //public void Awake()
     //{
@@ -79,6 +87,7 @@ public class GameManager : NetworkBehaviour
     {
         foreach (PlayerInfo info in GameData.Instance.allPlayers)
         {
+           
             SpawnPlayer(info);
         }
     }
@@ -97,17 +106,20 @@ public class GameManager : NetworkBehaviour
         isGameOver = true;
         Debug.Log("GAME OVER");
         Player winner = null;
+        
         var scene = NetworkManager.SceneManager.LoadScene("GameOver",
         UnityEngine.SceneManagement.LoadSceneMode.Single);
         
 
         foreach (Player player in players)
         {
-            player.PauseGame();
+            player.movementSpeed = 0f;
+            player.rotationSpeed = 0f;
             if (player.Score.Value >= maxScore)
             {
                 winner = player;
             }
+
         }
 
         foreach (Player player in players)
@@ -120,7 +132,7 @@ public class GameManager : NetworkBehaviour
             {
                 player.gameObject.transform.LookAt(winner.transform);
             }
-
+            
         }
 
         var bullets = GameObject.FindGameObjectsWithTag("Bullet");
