@@ -27,6 +27,8 @@ public class Player : NetworkBehaviour
     public float timeRemaining = 30f;
     public Vector3 startPos;
     public float maxDist = 10;
+    public float currentDist;
+    
 
 
     private void Start()
@@ -167,6 +169,7 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
+        currentDist = Vector3.Distance(startPos, transform.position);
         if (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
@@ -193,6 +196,11 @@ public class Player : NetworkBehaviour
         {
             transform.Translate(PositionChange.Value);
             transform.Rotate(RotationChange.Value);
+        }
+
+        if (currentDist >= maxDist)
+        {
+            transform.position = startPos;
         }
 
         if (Score.Value <= 0)
