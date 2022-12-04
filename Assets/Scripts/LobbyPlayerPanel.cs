@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 
-public class LobbyPlayerPanel : MonoBehaviour
+public class LobbyPlayerPanel : NetworkBehaviour
 {
     [SerializeField] protected TMPro.TMP_Text txtName;
     [SerializeField] protected TMPro.TMP_Text txtReady;
@@ -49,9 +50,17 @@ public class LobbyPlayerPanel : MonoBehaviour
         }
     }
 
-    //public void ShowKick(bool isKicked)
-    //{
-    //    isKicked = true;
-    //    return isKicked;
-    //}
+    public void ShowKick(bool isKicked)
+    {
+        if (IsHost)
+        {
+            btnKick.gameObject.SetActive(true);
+        }
+
+        else if(IsClient && !IsHost)
+        {
+            btnKick.gameObject.SetActive(false);
+        }
+
+    }
 }
